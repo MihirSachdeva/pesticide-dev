@@ -20,3 +20,6 @@ services:
     user: ""
     password: ""
     name: ""
+dev:
+  allow_all: True # To allow anyone (outside of IMG) to use the app
+  allow_any_master: True # To make everyone master of the app (admin)

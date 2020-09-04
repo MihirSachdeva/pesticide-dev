@@ -127,7 +127,7 @@ class UserViewSet(viewsets.ModelViewSet):
                     is_imgian = True
 
             # Remove the following line to allow only members of IMG to use the app.
-            is_imgian = True
+            is_imgian = BASE_CONFIGURATION["dev"]["allow_all"]
 
             if not is_imgian:
                 return Response(
@@ -141,7 +141,7 @@ class UserViewSet(viewsets.ModelViewSet):
                     is_master = True
 
             # Remove the following line to allow only coordinators to become masters of the app.
-            is_master = True
+            is_master = BASE_CONFIGURATION["dev"]["allow_any master"]
 
             enrollment_number = user_data['student']['enrolmentNumber']
             email = user_data['contactInformation']['instituteWebmailAddress']
