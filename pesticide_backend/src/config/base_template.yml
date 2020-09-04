@@ -1,0 +1,22 @@
+i18n:
+  language_code: ""
+  timezone: ""
+keys:
+  secret_key: ""
+  client_id: ""
+  client_secret: ""
+  redirect_uri: ""
+  desired_state: ""
+services:
+  email:
+    email_host: ""
+    email_port:
+    email_host_user: ""
+    email_host_password: ""
+    email_use_tls:
+  database:
+    host: ""
+    port: ""
+    user: ""
+    password: ""
+    name: ""

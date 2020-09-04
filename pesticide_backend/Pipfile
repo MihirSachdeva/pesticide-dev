@@ -1,0 +1,25 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+django = "*"
+djangorestframework = "*"
+django-cors-headers = "*"
+django-rest-auth = "*"
+django-richtextfield = "*"
+pillow = "*"
+channels = "*"
+requests = "*"
+python-slugify = "*"
+django-filter = "*"
+channels-redis = "*"
+mysqlclient = "*"
+python-decouple = "*"
+pyyaml = "*"
+
+[requires]
+python_version = "3.8"
