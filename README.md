@@ -15,7 +15,7 @@ Made for [IMG IIT Roorkee](https://img.channeli.in) Developers' Summer Project o
 Open your terminal in a folder of your choice (where you would want to store your repository.) For example, if you want to clone this project in the Home (~) directory, enter the following command:
 
 ```bash
-user@system:~$ git clone https://github.com/MihirSachdeva/Pesticide.git
+user@system:~$ git clone https://github.com/MihirSachdeva/pesticide-dev.git
 ```
 
 Then move to the newly formed directory called `Pesticide`
