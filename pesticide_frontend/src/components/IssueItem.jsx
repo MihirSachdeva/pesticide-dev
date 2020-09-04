@@ -136,31 +136,37 @@ const IssueItem = (props) => {
           >
             <div className="project-issue-tags">
               {props.tags.map((tag) => (
-                <Button
-                  onClick="event.stopPropagation()"
-                  className="project-issue-tag issue-button-filled-outline"
-                  variant="outlined"
-                  style={{
-                    borderRadius: "10px",
-                    textTransform: "none",
-                    marginRight: "5px",
-                    color:
-                      props.tagNameColorList &&
-                      props.tagNameColorList[tag] &&
-                      props.tagNameColorList[tag].tagColor,
-                    fontWeight: "900",
-                    marginBottom: "5px",
-                  }}
-                >
-                  <div>
-                    #
+                <span>
+                  <Button
+                    onClick="event.stopPropagation()"
+                    className="project-issue-tag issue-button-filled-outline"
+                    style={{
+                      borderRadius: "10px",
+                      textTransform: "none",
+                      marginRight: "5px",
+                      fontWeight: "500",
+                      marginBottom: "5px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <div
+                      style={{
+                        backgroundColor:
+                          props.tagNameColorList &&
+                          props.tagNameColorList[tag] &&
+                          props.tagNameColorList[tag].tagColor,
+                      }}
+                      className="tag-color"
+                    ></div>
                     <span className="issue-tag-text">
                       {props.tagNameColorList &&
                         props.tagNameColorList[tag] &&
                         props.tagNameColorList[tag].tagText}
                     </span>
-                  </div>
-                </Button>
+                  </Button>
+                </span>
               ))}
             </div>
             <div className="project-issue-tags">

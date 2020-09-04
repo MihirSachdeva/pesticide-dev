@@ -645,7 +645,7 @@ header.MuiAppBar-positionAbsolute {
 .issue-button-filled-outline {
   border-radius: 50px !important;
   border: none !important;
-  border: 1.4px solid rgba(140, 140, 140, 0.274) !important;
+  border: 1px solid rgba(104, 104, 104, 0.383) !important;
   white-space: nowrap;
 }
 
@@ -775,20 +775,31 @@ header.MuiAppBar-positionAbsolute {
   margin-right: 5px;
 }
 
-/* .project-issue-tags {
+.project-issue {
+  white-space: nowrap;
+}
+
+.project-issue-tags {
   display: flex;
-  flex-direction: row;
-} */
+  flex-flow: wrap;
+}
 
 /* .issue-tag-text {
   white-space: nowrap;
 } */
 
 .project-issue-tag-icon {
-  width: 8px;
-  height: 8px;
-  border-radius: 7px;
+  width: 9px;
+  height: 9px;
+  border-radius: 100px;
   /* background-color: #775ada; */
+}
+
+.tag-color {
+  width: 7px;
+  height: 7px;
+  border-radius: 100px;
+  margin-right: 3px;
 }
 
 .project-issue-details-right {
@@ -992,7 +1003,7 @@ header.MuiAppBar-positionAbsolute {
 }
 
 .project-issue-reporter {
-  font-weight: 600 !important;
+  font-weight: 500 !important;
 }
 
 .project-issue-reported-by-image {

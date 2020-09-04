@@ -390,8 +390,8 @@ const Issue = (props) => {
         };
       case "solarizedLight":
         return {
-          sent: "#234b5a4a",
-          sentColor: "#234b5a4a",
+          sent: "#ccc7b8a6",
+          sentColor: "#ccc7b8a6",
           recieved: "#ccc7b8a6",
           recievedColor: "#ccc7b8a6",
           after: "#eee8d5",
@@ -493,7 +493,8 @@ const Issue = (props) => {
                 }}
                 size="small"
               >
-                <DeleteOutlineOutlinedIcon color="error" />
+                <DeleteOutlineOutlinedIcon color="error" />{" "}
+                {!isMobile && "Delete"}
               </Button>
             )}
           </div>
@@ -511,7 +512,7 @@ const Issue = (props) => {
                     </Typography>
                     <Button
                       variant="outlined"
-                      className="project-reporter issue-button-filled-bg-transparent"
+                      className="project-reporter issue-button-filled-outline"
                       style={{
                         borderRadius: "10px",
                         textTransform: "none",
@@ -588,9 +589,9 @@ const Issue = (props) => {
                     >
                       <Button
                         variant="outlined"
-                        className="project-issue-reporter issue-button-filled-bg-transparent"
+                        className="project-issue-reporter issue-button-filled-outline"
                         style={{
-                          borderRadius: "10px",
+                          borderRadius: "100px",
                           textTransform: "none",
                           whiteSpace: "nowrap",
                         }}
@@ -605,10 +606,8 @@ const Issue = (props) => {
                             alt="Issue Reporter"
                           />
                         </div>
-                        &nbsp;
                         {issue.reporter_details.name}
                       </Button>
-                      &nbsp;&nbsp;
                     </Link>
                   </div>
                   <div
@@ -623,24 +622,32 @@ const Issue = (props) => {
                       {issue.tags && issue.tags.length != 0 ? (
                         issue.tags.map((tag) => (
                           <Button
-                            className="project-issue-tag issue-button-filled-bg-transparent"
+                            className="project-issue-tag issue-button-filled-outline"
                             variant="outlined"
                             style={{
                               borderRadius: "10px",
                               textTransform: "none",
                               marginRight: "5px",
-                              color:
-                                tagNameColorList &&
-                                tagNameColorList[tag].tagColor,
-                              fontWeight: "900",
+                              fontWeight: "500",
                               marginBottom: "5px",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
                             }}
                           >
-                            <div>
-                              #
+                            <div
+                              style={{
+                                backgroundColor:
+                                  tagNameColorList &&
+                                  tagNameColorList[tag] &&
+                                  tagNameColorList[tag].tagColor,
+                              }}
+                              className="tag-color"
+                            ></div>
+                            <span>
                               {tagNameColorList &&
                                 tagNameColorList[tag].tagText}
-                            </div>
+                            </span>
                           </Button>
                         ))
                       ) : (
@@ -650,26 +657,22 @@ const Issue = (props) => {
                   </div>
 
                   <div className="issue-assigned-to">
-                    <Typography
-                      className="issue-button-label"
-                      style={{
-                        marginBottom: "5px",
-                      }}
-                    >
+                    <Typography className="issue-button-label">
                       Assigned to:
                     </Typography>
                     {
-                      <div className="project-issue-tags issue-tag-text">
+                      <>
                         {assignee ? (
-                          <Link to={"/users/" + assignee.enrollment_number}>
+                          <Link
+                            to={"/users/" + assignee.enrollment_number}
+                            style={{ marginRight: "5px" }}
+                          >
                             <Button
                               onClick="event.stopPropagation()"
                               variant="outlined"
-                              className="project-issue-reporter issue-button-filled-bg-transparent"
+                              className="project-issue-reporter issue-button-filled-outline"
                               style={{
-                                borderRadius: "10px",
                                 textTransform: "none",
-                                marginBottom: "5px",
                               }}
                             >
                               <div className="project-issue-reported-by-image">
@@ -696,14 +699,13 @@ const Issue = (props) => {
                           <>
                             <Button
                               variant="outlined"
-                              className="project-reporter issue-button-filled-bg-transparent"
+                              className="project-reporter issue-button-filled-outline"
                               style={{
                                 textTransform: "none",
                                 borderRadius: "10px",
                                 width: "fit-content",
                                 alignSelf: "flex-start",
-                                fontWeight: "700",
-                                marginBottom: "5px",
+                                fontWeight: "500",
                               }}
                               onClick={
                                 (issue.reporter_details.id ==
@@ -717,9 +719,9 @@ const Issue = (props) => {
                             >
                               <AssignmentIndIcon
                                 fontSize="small"
-                                style={{ marginRight: "5px" }}
+                                style={{ marginRight: !isMobile && "4px" }}
                               />
-                              Change
+                              {!isMobile && "Change"}
                             </Button>
                             <Menu
                               anchorEl={anchorElUsers}
@@ -823,7 +825,7 @@ const Issue = (props) => {
                             </Menu>
                           </>
                         )}
-                      </div>
+                      </>
                     }
                   </div>
 
@@ -905,7 +907,8 @@ const Issue = (props) => {
               </Button>
             </div>
 
-            <hr className="divider2" style={{ marginBottom: "10px" }} />
+            <hr className="divider2" style={{ marginBottom: "0" }} />
+            <div className="comment-between"></div>
             <div className="comments-section">
               {/* <div className="comments-header">
                 <div>Comments</div>
