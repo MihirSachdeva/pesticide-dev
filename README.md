@@ -1,6 +1,6 @@
 # Pesticide
 
-## A clean and feature-rich project-management and bug-tracking app.
+## A project-management and bug-tracking app.
 
 Backend written in [Django](https://www.djangoproject.com), with [DjangoREST](https://www.django-rest-framework.org) for APIs.
 
