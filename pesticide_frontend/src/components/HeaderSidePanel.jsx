@@ -154,21 +154,8 @@ const HeaderSidePanel = (props) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const classes = useStyles();
-  // const [open, setOpen] = useState(window.innerWidth > 850);
-  const [open, setOpen] = useState(false);
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-  const magic = {
-    color: props.currentTheme == "palpatine" && "red",
-  };
-
   const [projects, setProjects] = React.useState([]);
   const [issues, setIssues] = React.useState([]);
-  const [comments, setComments] = React.useState([]);
   const [users, setUsers] = React.useState([]);
   const [isAdmin, setIsAdmin] = React.useState(false);
   const [searchQuery, setSearchQuery] = React.useState("");
@@ -226,12 +213,6 @@ const HeaderSidePanel = (props) => {
       .get(api_links.API_ROOT + `users/?search=${search}`)
       .then((res) => {
         setUsers(res.data);
-      })
-      .catch((err) => console.log(err));
-    axios
-      .get(api_links.API_ROOT + `comments/?search=${search}`)
-      .then((res) => {
-        setComments(res.data);
       })
       .catch((err) => console.log(err));
   }
@@ -409,55 +390,6 @@ const HeaderSidePanel = (props) => {
                               {issue.status_text.length < 10
                                 ? issue.status_text
                                 : issue.status_text.slice(0, 10) + "..."}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </ListItem>
-                  </Link>
-                ))}
-              </>
-            )}
-
-            {searchQuery != "" && comments.length != 0 && (
-              <>
-                <div className="sidepanel-section-heading">
-                  <div className="sidepanel-section-title">
-                    {searchQuery == "" && "Newest"} Comments
-                  </div>
-                  <div className="sidepanel-section-divider"></div>
-                </div>
-                {comments.map((comment) => (
-                  <Link to={"/issues/" + comment.issue}>
-                    <ListItem button className="drawer-btn-filled">
-                      <div className="sidepanel-item sidepanel-item-comment">
-                        <img
-                          src={
-                            comment.commentor_details.display_picture ||
-                            "/sunglasses.svg"
-                          }
-                          className="sidepanel-item-icon"
-                          style={{ borderRadius: "100px" }}
-                        />
-                        <div className="sidepanel-item-contents">
-                          <div
-                            className="sidepanel-item-title sidepanel-comment"
-                            dangerouslySetInnerHTML={{ __html: comment.text }}
-                          ></div>
-                          <div className="sidepanel-item-context">
-                            <div className="sidepanel-item-context-item">
-                              {"Issue " + comment.issue + " •"}
-                            </div>
-                            <div className="sidepanel-item-context-item">
-                              {comment.issue_details.project_name.length < 15
-                                ? comment.issue_details.project_name
-                                : comment.issue_details.project_name.split(
-                                    0,
-                                    15
-                                  ) + "..."}
-                            </div>
-                            <div className="sidepanel-item-context-item">
-                              {comment.project_name}
                             </div>
                           </div>
                         </div>
