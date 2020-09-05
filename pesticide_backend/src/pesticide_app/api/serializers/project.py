@@ -25,6 +25,7 @@ class ProjectSerializer(serializers.ModelSerializer):
     icon = serializers.SerializerMethodField('project_icon')
     icon_id = serializers.SerializerMethodField('project_icon_id')
     projectslug = serializers.SerializerMethodField('projectSlug')
+    project_members = serializers.SerializerMethodField('members')
 
     def projectSlug(self, obj):
         return slugify(obj.name)
@@ -42,6 +43,18 @@ class ProjectSerializer(serializers.ModelSerializer):
         except:
             icon_id = None
         return icon_id
+
+    def members(self, obj):
+        member_list = []
+        for user in list(obj.members.all()):
+            data = {
+                'id': user.id,
+                'name': user.name,
+                'enrollment_number': user.enrollment_number,
+                'display_picture': user.display_picture
+            }
+            member_list.append(data)
+        return member_list
 
     class Meta:
         model = Project
