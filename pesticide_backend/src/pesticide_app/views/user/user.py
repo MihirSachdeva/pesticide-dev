@@ -117,12 +117,13 @@ class UserViewSet(viewsets.ModelViewSet):
 
         try:
             existingUser = User.objects.get(
-                enrollment_number=user_data['student']['enrolmentNumber']
+                enrollment_number=user_data.get(
+                    'student', {}).get('enrolmentNumber')
             )
 
         except User.DoesNotExist:
             is_imgian = False
-            for role in user_data['person']['roles']:
+            for role in user_data.get('person', {}).get('roles'):
                 if 'Maintainer' in role.values():
                     is_imgian = True
 
@@ -136,22 +137,22 @@ class UserViewSet(viewsets.ModelViewSet):
                 )
 
             is_master = False
-            if user_data['student']['currentYear'] == 4:
+            if user_data.get('student', {}).get('currentYear') == 4:
                 is_master = True
 
             # Remove the following line to allow only coordinators to become masters of the app.
             is_master = BASE_CONFIGURATION["dev"]["allow_any_master"]
 
-            enrollment_number = user_data['student']['enrolmentNumber']
-            email = user_data['contactInformation']['instituteWebmailAddress']
-            full_name = user_data['person']['fullName']
+            enrollment_number = user_data.get('student', {}).get('enrolmentNumber')
+            email = user_data.get('contactInformation', {}).get('instituteWebmailAddress')
+            full_name = user_data.get('person', {}).get('fullName')
             first_name = full_name.split()[0]
-            current_year = user_data['student']['currentYear']
-            branch_name = user_data['student']['branch name']
-            degree_name = user_data['student']['branch degree name']
-            if user_data['person']['displayPicture'] != None:
+            current_year = user_data.get('student', {}).get('currentYear')
+            branch_name = user_data.get('student', {}).get('branch name')
+            degree_name = user_data.get('student', {}).get('branch degree name')
+            if user_data.get('person', {}).get('displayPicture') != None:
                 display_picture = 'http://internet.channeli.in' + \
-                    user_data['person']['displayPicture']
+                    user_data.get('person', {}).get('displayPicture')
             else:
                 display_picture = ''
 
@@ -188,12 +189,12 @@ class UserViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_202_ACCEPTED
             )
 
-        current_year = user_data['student']['currentYear']
-        branch_name = user_data['student']['branch name']
-        degree_name = user_data['student']['branch degree name']
-        if user_data['person']['displayPicture'] != None:
+        current_year = user_data.get('student', {}).get('currentYear')
+        branch_name = user_data.get('student', {}).get('branch name')
+        degree_name = user_data.get('student', {}).get('branch degree name')
+        if user_data.get('person', {}).get('displayPicture') != None:
             display_picture = 'http://internet.channeli.in' + \
-                user_data['person']['displayPicture']
+                user_data.get('person', {}).get('displayPicture')
         else:
             display_picture = ''
 
