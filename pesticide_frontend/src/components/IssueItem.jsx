@@ -136,37 +136,34 @@ const IssueItem = (props) => {
           >
             <div className="project-issue-tags">
               {props.tags.map((tag) => (
-                <span>
-                  <Button
-                    onClick="event.stopPropagation()"
-                    className="project-issue-tag issue-button-filled-outline"
+                <Button
+                  onClick="event.stopPropagation()"
+                  className="project-issue-tag issue-button-filled-outline"
+                  style={{
+                    borderRadius: "10px",
+                    textTransform: "none",
+                    margin: "2px 5px 2px 0",
+                    fontWeight: "500",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <div
                     style={{
-                      borderRadius: "10px",
-                      textTransform: "none",
-                      marginRight: "5px",
-                      fontWeight: "500",
-                      marginBottom: "5px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <div
-                      style={{
-                        backgroundColor:
-                          props.tagNameColorList &&
-                          props.tagNameColorList[tag] &&
-                          props.tagNameColorList[tag].tagColor,
-                      }}
-                      className="tag-color"
-                    ></div>
-                    <span className="issue-tag-text">
-                      {props.tagNameColorList &&
+                      backgroundColor:
+                        props.tagNameColorList &&
                         props.tagNameColorList[tag] &&
-                        props.tagNameColorList[tag].tagText}
-                    </span>
-                  </Button>
-                </span>
+                        props.tagNameColorList[tag].tagColor,
+                    }}
+                    className="tag-color"
+                  ></div>
+                  <span className="issue-tag-text">
+                    {props.tagNameColorList &&
+                      props.tagNameColorList[tag] &&
+                      props.tagNameColorList[tag].tagText}
+                  </span>
+                </Button>
               ))}
             </div>
             <div className="project-issue-tags">
