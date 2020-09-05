@@ -198,21 +198,11 @@ const HeaderSidePanel = (props) => {
 
   async function getSearchData(search) {
     axios
-      .get(api_links.API_ROOT + `issue_search/?search=${search}`)
+      .get(api_links.API_ROOT + `search?q=${search}`)
       .then((res) => {
-        setIssues(res.data);
-      })
-      .catch((err) => console.log(err));
-    axios
-      .get(api_links.API_ROOT + `projects/?search=${search}`)
-      .then((res) => {
-        setProjects(res.data);
-      })
-      .catch((err) => console.log(err));
-    axios
-      .get(api_links.API_ROOT + `users/?search=${search}`)
-      .then((res) => {
-        setUsers(res.data);
+        setIssues(res.data.issues);
+        setUsers(res.data.users);
+        setProjects(res.data.projects);
       })
       .catch((err) => console.log(err));
   }
