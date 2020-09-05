@@ -197,7 +197,6 @@ class UserViewSet(viewsets.ModelViewSet):
         else:
             display_picture = ''
 
-        existingUser.is_master = is_master
         existingUser.current_year = current_year
         existingUser.branch = branch_name
         existingUser.degree = degree_name

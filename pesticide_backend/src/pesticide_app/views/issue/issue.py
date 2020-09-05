@@ -26,7 +26,8 @@ class IssueViewSet(viewsets.ModelViewSet):
     pagination_class = StandardResultsSetPagination
     filter_backends = (DjangoFilterBackend, SearchFilter)
     search_fields = ['title']
-    filterset_fields = ['project', 'reporter', 'assigned_to', 'tags', 'status__type']
+    filterset_fields = ['project', 'reporter',
+                        'assigned_to', 'tags', 'status__type']
 
     def create(self, request, *args, **kwargs):
         issue = request.data
@@ -92,8 +93,6 @@ class IssueViewSet(viewsets.ModelViewSet):
                         issue.project.name,
                         projectPageLink,
                         issue.title,
-                        # old_status temporarily set as IssueStatus of id = 1...
-                        IssueStatus.objects.get(id=1),
                         new_status,
                         status_updated_by,
                         issue.reporter,
