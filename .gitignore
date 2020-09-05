@@ -75,6 +75,3 @@ pesticide_backend/src/config/settings.ini
 
 # pychache
 *__pycache__/
-
-#migrations
-*migrations/
