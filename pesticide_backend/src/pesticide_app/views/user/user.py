@@ -198,10 +198,17 @@ class UserViewSet(viewsets.ModelViewSet):
         else:
             display_picture = ''
 
-        existingUser.current_year = current_year
-        existingUser.branch = branch_name
-        existingUser.degree = degree_name
-        existingUser.display_picture = display_picture
+        if existingUser.current_year != current_year
+            existingUser.current_year = current_year
+
+        if existingUser.branch != branch_name:
+            existingUser.branch = branch_name
+
+        if existingUser.degree != degree_name:
+            existingUser.degree = degree_name
+
+        if existingUser.display_picture != display_picture:
+            existingUser.display_picture = display_picture
 
         if existingUser.access_token != access_token:
             existingUser.access_token = access_token
