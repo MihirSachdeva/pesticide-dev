@@ -361,7 +361,7 @@ const Admin = (props) => {
                         width: "fit-content",
                         margin: "10px auto",
                       }}
-                      className="project-issue-tag issue-button-filled"
+                      className="project-issue-tag issue-button-filled-outline"
                       onClick={() => {
                         openFormDialog(
                           "edit_tag",
@@ -462,7 +462,7 @@ const Admin = (props) => {
                         width: "fit-content",
                         margin: "10px auto",
                       }}
-                      className="project-issue-tag issue-button-filled"
+                      className="project-issue-tag issue-button-filled-outline"
                       onClick={() => {
                         openFormDialog(
                           "edit_status",
