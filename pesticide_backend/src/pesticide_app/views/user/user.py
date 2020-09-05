@@ -198,7 +198,7 @@ class UserViewSet(viewsets.ModelViewSet):
         else:
             display_picture = ''
 
-        if existingUser.current_year != current_year
+        if existingUser.current_year != current_year:
             existingUser.current_year = current_year
 
         if existingUser.branch != branch_name:
