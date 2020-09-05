@@ -84,7 +84,9 @@ const Settings = (props) => {
               Email Settings
             </div>
             <div>Select when you would like to get notified by email.</div>
-            <div>Your email address is: {"mihir_s@pp.iitr.ac.in"}</div>
+            <div>
+              Your email address is: <strong>{user && user.email}</strong>
+            </div>
           </div>
         </center>
 
