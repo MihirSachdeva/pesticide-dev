@@ -322,16 +322,10 @@ const HeaderSidePanel = (props) => {
                           </div>
                           <div className="sidepanel-item-context"></div>
                           <div className="sidepanel-item-members">
-                            {project.members.map((member) => (
+                            {project.project_members.map((member) => (
                               <img
                                 src={
-                                  (users != [] &&
-                                    users.filter(
-                                      (user) => user.id == member
-                                    )[0] &&
-                                    users.filter((user) => user.id == member)[0]
-                                      .display_picture) ||
-                                  "/sunglasses.svg"
+                                  member.display_picture || "/sunglasses.svg"
                                 }
                                 className="sidepanel-item-member-image"
                               />
