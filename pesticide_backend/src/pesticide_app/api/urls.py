@@ -28,4 +28,5 @@ urlpatterns += [
     url(r'topdebuggers', TopDebuggersView.as_view()),
     url(r'tag_colors', TagColorsView.as_view()),
     url(r'issue_status_colors', IssueStatusColorsView.as_view()),
+    url(r'search', SearchView.as_view()),
 ]
