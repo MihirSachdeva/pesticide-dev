@@ -271,7 +271,11 @@ const Admin = (props) => {
 
   return (
     <>
-      <UtilityComponent onlyAdmins title={HEADER_NAV_TITLES.ADMIN} page="ADMIN" />
+      <UtilityComponent
+        onlyAdmins
+        title={HEADER_NAV_TITLES.ADMIN}
+        page="ADMIN"
+      />
 
       <div>
         <TitleCard title="Admin" />
@@ -352,9 +356,7 @@ const Admin = (props) => {
                   tags.map((tag) => (
                     <Button
                       style={{
-                        color: tag.color,
                         textTransform: "none",
-                        fontWeight: "900",
                         fontSize: "17px",
                         width: "fit-content",
                         margin: "10px auto",
@@ -387,7 +389,13 @@ const Admin = (props) => {
                         );
                       }}
                     >
-                      {tag.tag_text}
+                      <div
+                        style={{
+                          backgroundColor: tag.color,
+                        }}
+                        className="tag-color"
+                      ></div>
+                      <span>{tag.tag_text}</span>
                     </Button>
                   ))}
               </div>
