@@ -228,14 +228,11 @@ const NewIssueForm = (props) => {
                     <MenuItem key={tag.tag_text} value={tag.id}>
                       <div
                         style={{
-                          color: tag.color,
-                          fontWeight: "900",
+                          backgroundColor: tag.color,
                         }}
-                      >
-                        <span className="issue-tag-text">
-                          {"#" + tag.tag_text}
-                        </span>
-                      </div>
+                        className="tag-color"
+                      ></div>
+                      <span className="issue-tag-text">{tag.tag_text}</span>
                     </MenuItem>
                   ))}
                 </Select>
