@@ -76,5 +76,5 @@ def issue_status_update(project_name, project_page_link, issue_title, new_status
             from_email=settings.EMAIL_HOST_USER,
             recipient_list=[email, ],
             html_message=html,
-            fail_silently=False
+            fail_silently=True
         )

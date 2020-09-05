@@ -41,5 +41,5 @@ def new_issue_reported(project_name, project_page_link, reported_by, issue_title
                 from_email=settings.EMAIL_HOST_USER,
                 recipient_list=[email, ],
                 html_message=html,
-                fail_silently=False
+                fail_silently=True
             )

@@ -38,5 +38,6 @@ def new_project_added(project_name, project_link, project_page_link, project_cre
                 message=text,
                 from_email=settings.EMAIL_HOST_USER,
                 recipient_list=[email, ],
-                html_message=html
+                html_message=html,
+                fail_silently=True
             )

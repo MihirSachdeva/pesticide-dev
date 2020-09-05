@@ -36,5 +36,6 @@ def issue_assigned(project_name, project_page_link, issue_title, issue_tags, ass
             message=text,
             from_email=settings.EMAIL_HOST_USER,
             recipient_list=[assigned_to.email, ],
-            html_message=html
+            html_message=html,
+            fail_silently=True
         )

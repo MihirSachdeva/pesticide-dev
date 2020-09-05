@@ -119,5 +119,5 @@ def new_comment(project_name, project_page_link, issue_title, issue_reporter_nam
                 from_email=settings.EMAIL_HOST_USER,
                 recipient_list=[issue_assignee.email, ],
                 html_message=html,
-                fail_silently=False
+                fail_silently=True
             )

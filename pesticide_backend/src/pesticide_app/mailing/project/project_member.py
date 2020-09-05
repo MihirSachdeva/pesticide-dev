@@ -39,4 +39,5 @@ def add_project_member(project_name, project_link, project_page_link, member_add
                 from_email=settings.EMAIL_HOST_USER,
                 recipient_list=[email, ],
                 html_message=html,
+                fail_silently=True
             )

@@ -38,5 +38,5 @@ def project_status_update(project_name, project_link, project_page_link, old_sta
                 from_email=settings.EMAIL_HOST_USER,
                 recipient_list=[email, ],
                 html_message=html,
-                fail_silently=False
+                fail_silently=True
             )
