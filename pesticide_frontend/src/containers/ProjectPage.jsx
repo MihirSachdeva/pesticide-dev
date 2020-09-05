@@ -487,18 +487,19 @@ const ProjectPage = (props) => {
                           <Chip
                             className="issue-filter-tag-chip"
                             label={
-                              <div
-                                style={{
-                                  color:
-                                    tagNameColorList[tag] &&
-                                    tagNameColorList[tag].tagColor,
-                                  fontWeight: "900",
-                                }}
-                              >
-                                #
+                              <div className="issue-filter-tag-chip-item">
+                                <div
+                                  style={{
+                                    backgroundColor:
+                                      tagNameColorList &&
+                                      tagNameColorList[tag] &&
+                                      tagNameColorList[tag].tagColor,
+                                    marginRight: "7px",
+                                  }}
+                                  className="tag-color"
+                                ></div>
                                 <span className="issue-tag-text">
-                                  {tagNameColorList[tag] &&
-                                    tagNameColorList[tag].tagText}
+                                  {tagNameColorList[tag].tagText}
                                 </span>
                               </div>
                             }
@@ -544,14 +545,12 @@ const ProjectPage = (props) => {
                       >
                         <div
                           style={{
-                            color: tag.color,
-                            fontWeight: "900",
+                            backgroundColor: tag.color,
+                            marginRight: "10px",
                           }}
-                        >
-                          <span className="issue-tag-text">
-                            {"#" + tag.tag_text}
-                          </span>
-                        </div>
+                          className="tag-color"
+                        ></div>
+                        <span className="issue-tag-text">{tag.tag_text}</span>
                       </MenuItem>
                     ))}
                 </Menu>
@@ -634,7 +633,7 @@ const ProjectPage = (props) => {
             ))
           ) : issues.length == 0 ? (
             <center>
-              <Typography>No issue has been reported yet.</Typography>
+              <Typography>No issue to show.</Typography>
             </center>
           ) : (
             <>

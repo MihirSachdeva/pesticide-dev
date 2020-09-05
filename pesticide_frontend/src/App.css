@@ -975,6 +975,12 @@ header.MuiAppBar-positionAbsolute {
   width: auto !important;
 }
 
+.issue-filter-tag-chip-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .issue-tag-filter-chip-container {
   display: flex;
   flex-direction: row;
