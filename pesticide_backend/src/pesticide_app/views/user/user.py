@@ -135,13 +135,12 @@ class UserViewSet(viewsets.ModelViewSet):
                     status=status.HTTP_401_UNAUTHORIZED
                 )
 
-            else:
-                is_master = False
-                if user_data['student']['currentYear'] > 3:
-                    is_master = True
+            is_master = False
+            if user_data['student']['currentYear'] == 4:
+                is_master = True
 
             # Remove the following line to allow only coordinators to become masters of the app.
-            is_master = BASE_CONFIGURATION["dev"]["allow_any master"]
+            is_master = BASE_CONFIGURATION["dev"]["allow_any_master"]
 
             enrollment_number = user_data['student']['enrolmentNumber']
             email = user_data['contactInformation']['instituteWebmailAddress']
@@ -155,9 +154,6 @@ class UserViewSet(viewsets.ModelViewSet):
                     user_data['person']['displayPicture']
             else:
                 display_picture = ''
-            is_master = False
-            if user_data['student']['currentYear'] > 3:
-                is_master = True
 
             new_user = User(
                 username=enrollment_number,
@@ -200,14 +196,6 @@ class UserViewSet(viewsets.ModelViewSet):
                 user_data['person']['displayPicture']
         else:
             display_picture = ''
-
-        # Include the following if a user must be checked for is_master (current_year > 3) upon every sign in.
-        is_master = False
-        if user_data['student']['currentYear'] > 3:
-            is_master = True
-
-        # Remove the following line to allow only coordinators to become masters of the app.
-        is_master = True
 
         existingUser.is_master = is_master
         existingUser.current_year = current_year
