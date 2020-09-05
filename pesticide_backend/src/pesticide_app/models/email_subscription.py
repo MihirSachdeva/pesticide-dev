@@ -1,6 +1,7 @@
 from django.db import models
 from .user import User
 
+
 class EmailSubscription(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='email_subscriptions', primary_key=True)
     on_new_project = models.BooleanField(default=True) # sent to all users
