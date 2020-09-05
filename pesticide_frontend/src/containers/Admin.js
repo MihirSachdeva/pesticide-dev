@@ -57,6 +57,7 @@ function a11yProps(index) {
 const Admin = (props) => {
   const [tags, setTags] = React.useState([]);
   const [statuses, setStatuses] = React.useState([]);
+  const [statusTypes, setStatusTypes] = React.useState([]);
   const [formDialog, setFormDialog] = React.useState({
     open: false,
   });
@@ -92,11 +93,21 @@ const Admin = (props) => {
       .catch((err) => console.log(err));
   }
 
+  async function fetchIssueStatusTypes() {
+    axios
+      .options(api_links.API_ROOT + "issuestatus/")
+      .then((res) => {
+        setStatusTypes(res.data.actions.POST.type.choices);
+      })
+      .catch((err) => console.log(err));
+  }
+
   React.useEffect(() => {
     fetchTags();
     fetchStatuses();
     setFormDialog({ open: false });
     fetchUsers();
+    fetchIssueStatusTypes();
   }, []);
 
   const openFormDialog = (
@@ -108,7 +119,8 @@ const Admin = (props) => {
     data,
     fields,
     showColorSwatches,
-    colorSwatchesType
+    colorSwatchesType,
+    options = []
   ) => {
     setFormDialog({
       open: true,
@@ -121,6 +133,7 @@ const Admin = (props) => {
       fields,
       showColorSwatches,
       colorSwatchesType,
+      options,
     });
   };
 
@@ -130,7 +143,7 @@ const Admin = (props) => {
     }));
   };
 
-  const confirmFormDialog = (action, choice, data, fields) => {
+  const confirmFormDialog = (action, choice, data, fields, options) => {
     switch (action) {
       case "edit_tag":
         choice && editTag(data, fields);
@@ -142,7 +155,7 @@ const Admin = (props) => {
         choice && editStatus(data, fields);
         break;
       case "add_status":
-        choice && addStatus(fields);
+        choice && addStatus(fields, options);
         break;
     }
   };
@@ -208,23 +221,23 @@ const Admin = (props) => {
       .catch((err) => console.log(err));
   };
 
-  const addStatus = (fields) => {
+  const addStatus = (fields, options) => {
     let status_text_index = fields.findIndex(
       (field) => field.name == "status_text"
     );
     let color_index = fields.findIndex((field) => field.name == "color");
     let status_text = fields[status_text_index].value;
     let color = fields[color_index].value;
+    let type = options[0].value;
     let status = {
       status_text: status_text,
       color: color,
+      type: type,
     };
-    console.log(status);
     axios
       .post(api_links.API_ROOT + "issuestatus/", status)
       .then((res) => {
         fetchStatuses();
-        console.log(res.data);
       })
       .catch((err) => console.log(err));
   };
@@ -426,7 +439,7 @@ const Admin = (props) => {
                     openFormDialog(
                       "add_status",
                       "Create a New Issue Status",
-                      "Status text has to be unique, color can be any valid CSS color.",
+                      "Status text has to be unique and color can be any valid CSS color. Choose a status type from the dropdown. Default status type is 'Pending'. Status type cannot be edited once saved.",
                       "Cancel",
                       "Save",
                       {},
@@ -443,7 +456,15 @@ const Admin = (props) => {
                         },
                       ],
                       true,
-                      "issue_status_colors"
+                      "issue_status_colors",
+                      [
+                        {
+                          title: "Status type",
+                          name: "status_type",
+                          choices: statusTypes,
+                          value: "",
+                        },
+                      ]
                     );
                   }}
                 >
@@ -534,6 +555,7 @@ const Admin = (props) => {
           fields={formDialog.fields}
           showColorSwatches={formDialog.showColorSwatches}
           colorSwatchesType={formDialog.colorSwatchesType}
+          options={formDialog.options}
         />
         <AlertDialog
           open={alert.open}
