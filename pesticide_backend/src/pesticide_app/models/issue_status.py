@@ -7,7 +7,7 @@ class IssueStatus(models.Model):
         CLOSED = 'Closed', "Closed"
         RESOLVED = 'Resolved', "Resolved"
 
-    status_text = models.CharField(max_length=30)
+    status_text = models.CharField(max_length=30, unique=True)
     color = models.CharField(max_length=10, default="#217bf3")
     type = models.CharField(max_length=30, choices=IssueStatusType.choices,
                             default=IssueStatusType.PENDING)
