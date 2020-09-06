@@ -10,6 +10,7 @@ BASE_CONFIGURATION = yaml.load(BASE_CONFIG_FILE, Loader=yaml.FullLoader)
 SECRET_KEY = BASE_CONFIGURATION["keys"]["secret_key"]
 DEBUG = True
 ALLOWED_HOSTS = ['*']
+PAGE_SIZE = BASE_CONFIGURATION["pagination"]["page_size"]
 
 # Application definition
 
