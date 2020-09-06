@@ -152,7 +152,7 @@ const Admin = (props) => {
         choice && addTag(fields);
         break;
       case "edit_status":
-        choice && editStatus(data, fields);
+        choice && editStatus(data, fields, options);
         break;
       case "add_status":
         choice && addStatus(fields, options);
@@ -180,7 +180,7 @@ const Admin = (props) => {
       .catch((err) => console.log(err));
   };
 
-  const editStatus = (data, fields) => {
+  const editStatus = (data, fields, options) => {
     let id = data.id;
     let status_text_index = fields.findIndex(
       (field) => field.name == "status_text"
@@ -188,9 +188,11 @@ const Admin = (props) => {
     let color_index = fields.findIndex((field) => field.name == "color");
     let status_text = fields[status_text_index].value;
     let color = fields[color_index].value;
+    let type = options[0].value;
     let status = {
       status_text: status_text,
       color: color,
+      type: type,
     };
     console.log(status);
     axios
@@ -516,7 +518,16 @@ const Admin = (props) => {
                             },
                           ],
                           true,
-                          "issue_status_colors"
+                          "issue_status_colors",
+                          [
+                            {
+                              title: "Status type",
+                              name: "status_type",
+                              choices: statusTypes,
+                              value: status.type,
+                              is_required: true,
+                            },
+                          ]
                         );
                       }}
                     >
