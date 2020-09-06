@@ -579,17 +579,19 @@ const ProjectPage = (props) => {
                 <Chip
                   className="issue-filter-tag-chip"
                   label={
-                    <div
-                      style={{
-                        color:
-                          tagNameColorList[tag] &&
-                          tagNameColorList[tag].tagColor,
-                        fontWeight: "900",
-                      }}
-                    >
-                      #
+                    <div className="issue-filter-tag-chip-item">
+                      <div
+                        style={{
+                          backgroundColor:
+                            tagNameColorList &&
+                            tagNameColorList[tag] &&
+                            tagNameColorList[tag].tagColor,
+                          marginRight: "7px",
+                        }}
+                        className="tag-color"
+                      ></div>
                       <span className="issue-tag-text">
-                        {tagNameColorList[tag] && tagNameColorList[tag].tagText}
+                        {tagNameColorList[tag].tagText}
                       </span>
                     </div>
                   }
