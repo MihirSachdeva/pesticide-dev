@@ -34,7 +34,6 @@ class IssueViewSet(viewsets.ModelViewSet):
         query_tag_ids = self.request.GET.get('tags', '')
         if len(query_tag_ids):
             query_tag_ids_list = query_tag_ids.split(',')
-            print(query_tag_ids_list)
             query_tags_set = set(Tag.objects.filter(id__in=query_tag_ids_list))
             filtered_issues = []
             for issue in issues:
