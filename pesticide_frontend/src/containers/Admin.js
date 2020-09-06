@@ -382,7 +382,7 @@ const Admin = (props) => {
                       onClick={() => {
                         openFormDialog(
                           "edit_tag",
-                          `Edit ${tag.tag_text} Tag`,
+                          `Edit tag '${tag.tag_text}'`,
                           "You can change the tag text and color. Color can be any valid CSS color.",
                           "Cancel",
                           "Save",
@@ -496,7 +496,7 @@ const Admin = (props) => {
                       onClick={() => {
                         openFormDialog(
                           "edit_status",
-                          `Edit ${status.status_text} status`,
+                          `Edit status '${status.status_text}'`,
                           "Status text has to be unique and color can be any valid CSS color. Status type can be selected from the dropdown.",
                           "Cancel",
                           "Save",
