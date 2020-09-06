@@ -12,7 +12,7 @@ from rest_framework.pagination import PageNumberPagination
 from pesticide_app.pagination import StandardResultsSetPagination
 from pesticide_app.api.serializers import IssueSerializer
 from pesticide_app.permissions import IssueCreatorPermissions, IssueProjectCreatorOrMembers, AdminOrReadOnlyPermisions
-from pesticide_app.models import Issue, IssueStatus, User
+from pesticide_app.models import Issue, IssueStatus, User, Tag
 from pesticide_app.mailing import new_issue_reported, issue_status_update, issue_assigned
 from slugify import slugify
 
@@ -27,7 +27,20 @@ class IssueViewSet(viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend, SearchFilter)
     search_fields = ['title']
     filterset_fields = ['project', 'reporter',
-                        'assigned_to', 'tags', 'status__type']
+                        'assigned_to', 'status__type']
+
+    def get_queryset(self):
+        issues = self.queryset
+        query_tag_ids = self.request.data.get("tags", [])
+        if len(query_tag_ids):
+            query_tags_set = set(Tag.objects.filter(id__in=query_tag_ids))
+            filtered_issues = []
+            for issue in issues:
+                tags = issue.tags.all()
+                if query_tags_set.issubset(set(tags)):
+                    filtered_issues.append(issue.id)
+            return issues.filter(id__in=filtered_issues)
+        return issues
 
     def create(self, request, *args, **kwargs):
         issue = request.data
