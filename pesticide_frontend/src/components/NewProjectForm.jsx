@@ -126,7 +126,7 @@ const NewProjectForm = (props) => {
       <div style={{ margin: "20px 5px" }}>
         <form noValidate onSubmit={handleFormSubmit}>
           <Grid container spacing={2}>
-            <Typography className="form-label">Project Name</Typography>
+            <Typography className="form-label">Project Name*</Typography>
             <Grid
               item
               xs={12}

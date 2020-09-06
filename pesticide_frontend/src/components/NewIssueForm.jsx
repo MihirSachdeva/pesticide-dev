@@ -106,7 +106,7 @@ const NewIssueForm = (props) => {
         <div style={{ margin: "20px 5px" }}>
           <form noValidate onSubmit={handleFormSubmit}>
             <Grid container spacing={2}>
-              <Typography className="form-label">Title</Typography>
+              <Typography className="form-label">Title*</Typography>
               <Grid
                 item
                 xs={12}

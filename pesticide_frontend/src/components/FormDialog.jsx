@@ -79,7 +79,7 @@ const FormDialog = (props) => {
               <>
                 <Typography className="form-label">
                   {field.title}
-                  {field.is_required && <sup>*</sup>}
+                  {field.is_required && "*"}
                 </Typography>
                 <TextField
                   name={field.name}
@@ -102,7 +102,7 @@ const FormDialog = (props) => {
               <>
                 <Typography className="form-label">
                   {option.title}
-                  {option.is_required && <sup>*</sup>}
+                  {option.is_required && "*"}
                 </Typography>
                 <Select
                   labelId="single-select-outlined-label"
