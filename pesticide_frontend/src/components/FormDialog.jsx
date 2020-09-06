@@ -77,7 +77,10 @@ const FormDialog = (props) => {
             fields != [] &&
             fields.map((field) => (
               <>
-                <Typography className="form-label">{field.title}</Typography>
+                <Typography className="form-label">
+                  {field.title}
+                  {field.is_required && <sup>*</sup>}
+                </Typography>
                 <TextField
                   name={field.name}
                   value={field.value}
@@ -97,7 +100,10 @@ const FormDialog = (props) => {
             options != [] &&
             options.map((option) => (
               <>
-                <Typography className="form-label">{option.title}</Typography>
+                <Typography className="form-label">
+                  {option.title}
+                  {option.is_required && <sup>*</sup>}
+                </Typography>
                 <Select
                   labelId="single-select-outlined-label"
                   id="single-select-outlined"
