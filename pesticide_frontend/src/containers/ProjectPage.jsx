@@ -310,9 +310,6 @@ const ProjectPage = (props) => {
     };
     var url = "issues/";
     if (tags.length != 0) {
-      // tags.forEach((tag, index) =>
-      //   index != 0 ? (url += `&tags=${tag}`) : (url += `?tags=${tag}`)
-      // );
       let csTags = tags.join(",");
       url += `?tags=${csTags}`;
       searchQuery && (url += `&search=${searchQuery}`);
