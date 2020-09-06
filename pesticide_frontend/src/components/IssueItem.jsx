@@ -184,7 +184,7 @@ const IssueItem = (props) => {
                         src={
                           props.reporterDetails.display_picture
                             ? props.reporterDetails.display_picture
-                            : "../sunglasses.svg"
+                            : "/sunglasses.svg"
                         }
                         alt="Issue Reporter"
                       />
