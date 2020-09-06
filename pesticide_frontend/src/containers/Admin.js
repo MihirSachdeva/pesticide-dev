@@ -445,7 +445,7 @@ const Admin = (props) => {
                     openFormDialog(
                       "add_status",
                       "Create a New Issue Status",
-                      "Status text has to be unique and color can be any valid CSS color. Choose a status type from the dropdown. Default status type is 'Pending', and default color is #217bf3. Status type cannot be edited once saved.",
+                      "Status text has to be unique and color can be any valid CSS color. Choose a status type from the dropdown.",
                       "Cancel",
                       "Save",
                       {},
@@ -497,7 +497,7 @@ const Admin = (props) => {
                         openFormDialog(
                           "edit_status",
                           `Edit ${status.status_text} status`,
-                          "You can change the status text and color. Status text has to be unique, color can be any valid CSS color.",
+                          "Status text has to be unique and color can be any valid CSS color. Status type can be selected from the dropdown.",
                           "Cancel",
                           "Save",
                           {
