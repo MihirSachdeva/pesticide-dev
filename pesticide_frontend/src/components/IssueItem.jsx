@@ -65,6 +65,8 @@ const IssueItem = (props) => {
             ...props.bgClass,
             ...projectDetails,
             textTransform: "none",
+            overflow: "auto",
+            margin: isMobile ? "0 2px" : "0 5px",
           }}
         >
           <div
@@ -134,7 +136,10 @@ const IssueItem = (props) => {
             className="project-issue-details-right"
             style={!isMobile ? projectDetailsLeftRight : null}
           >
-            <div className="project-issue-tags">
+            <div
+              className="project-issue-tags"
+              style={{ justifyContent: !isMobile && "flex-end" }}
+            >
               {props.tags.map((tag) => (
                 <Button
                   onClick="event.stopPropagation()"
@@ -177,6 +182,7 @@ const IssueItem = (props) => {
                       borderRadius: "10px",
                       textTransform: "none",
                       whiteSpace: "nowrap",
+                      marginTop: isMobile && "5px",
                     }}
                   >
                     <div className="project-issue-reported-by-image">

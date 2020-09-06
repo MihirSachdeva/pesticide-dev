@@ -49,19 +49,15 @@
   scroll-behavior: smooth !important;
 }
 
-#main-content > main:first-child,
-#main-content > center:first-child,
-#main-content > div:first-child {
+#main-content > main:first-child {
   height: calc(100vh - 64px);
 }
 
-@media screen and (max-width: 600px) {
-  #main-content > main:first-child,
-  #main-content > center:first-child,
-  #main-content > div:first-child {
+/* @media screen and (max-width: 600px) {
+  #main-content > main:first-child {
     height: calc(100vh - 120px);
   }
-}
+} */
 
 h2 {
   font-weight: 700 !important;
@@ -763,7 +759,6 @@ header.MuiAppBar-positionAbsolute {
   border: 0.5px solid #7373733d;
   font-size: 15px;
   line-height: 0.2 !important;
-  margin: 0 5px;
   background-color: #ffffff05;
 }
 
