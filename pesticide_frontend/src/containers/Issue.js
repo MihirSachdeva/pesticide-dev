@@ -3,7 +3,6 @@ import {
   MenuItem,
   Typography,
   Button,
-  Input,
   Menu,
   useMediaQuery,
 } from "@material-ui/core";
@@ -23,7 +22,8 @@ import ImageWithModal from "../components/ImageWithModal";
 import HEADER_NAV_TITLES from "../header_nav_titles";
 import * as api_links from "../APILinks";
 import WebSocketInstance from "../websocket";
-
+import Prism from "prismjs";
+import "prismjs/themes/prism-tomorrow.css";
 import axios from "axios";
 
 const Issue = (props) => {
@@ -73,6 +73,8 @@ const Issue = (props) => {
       showHoverButtons(false);
     }
   };
+
+  Prism.highlightAll();
 
   React.useEffect(() => {
     document.getElementById("main-main").addEventListener("scroll", scrollFunc);
@@ -1015,7 +1017,7 @@ const Issue = (props) => {
                           <div
                             className="comment-content"
                             dangerouslySetInnerHTML={{ __html: comment.text }}
-                          />
+                          ></div>
                           <div className="comment-bottom">
                             <div>{date}</div>
                           </div>
@@ -1041,12 +1043,8 @@ const Issue = (props) => {
                     <Editor
                       value={newComment.text}
                       init={{
-                        skin: !props.darkTheme
-                          ? "material-classic"
-                          : "oxide-dark",
-                        content_css: !props.darkTheme
-                          ? "material-classic"
-                          : "dark",
+                        skin: "material-classic",
+                        content_css: "material-classic",
                         placeholder: "Type a comment...",
                         icons: "thin",
                         height: 250,
@@ -1061,6 +1059,7 @@ const Issue = (props) => {
                             alignleft aligncenter alignright alignjustify | \
                             bullist numlist outdent indent | removeformat | table | code | help",
                         ],
+                        codesample_global_prismjs: true,
                       }}
                       onEditorChange={handleNewComment}
                     />

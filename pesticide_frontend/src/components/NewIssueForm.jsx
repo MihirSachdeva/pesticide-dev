@@ -138,16 +138,17 @@ const NewIssueForm = (props) => {
                     init={{
                       skin: "material-classic",
                       content_css: "material-classic",
+                      placeholder: "Type issue description...",
                       icons: "thin",
                       height: 250,
                       menubar: false,
                       plugins: [
                         "advlist autolink lists link image charmap print preview anchor",
                         "searchreplace visualblocks code fullscreen",
-                        "insertdatetime media table paste code help wordcount table",
+                        "insertdatetime media table code help wordcount table codesample",
                       ],
                       toolbar: [
-                        "undo redo | formatselect | bold italic backcolor | \
+                        "undo redo | formatselect | bold italic backcolor | codesample \
                             alignleft aligncenter alignright alignjustify | \
                             bullist numlist outdent indent | removeformat | table | code | help",
                       ],
@@ -166,10 +167,10 @@ const NewIssueForm = (props) => {
                       plugins: [
                         "advlist autolink lists link image charmap print preview anchor",
                         "searchreplace visualblocks code fullscreen",
-                        "insertdatetime media table paste code help wordcount table",
+                        "insertdatetime media table code help wordcount table codesample",
                       ],
                       toolbar: [
-                        "undo redo | formatselect | bold italic backcolor | \
+                        "undo redo | formatselect | bold italic backcolor | codesample \
                             alignleft aligncenter alignright alignjustify | \
                             bullist numlist outdent indent | removeformat | table | code | help",
                       ],

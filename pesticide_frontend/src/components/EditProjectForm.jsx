@@ -248,10 +248,10 @@ const EditProjectForm = (props) => {
                     plugins: [
                       "advlist autolink lists link image charmap print preview anchor",
                       "searchreplace visualblocks code fullscreen",
-                      "insertdatetime media table paste code help wordcount table",
+                      "insertdatetime media table paste code help wordcount table codesample",
                     ],
                     toolbar: [
-                      "undo redo | formatselect | bold italic backcolor | \
+                      "undo redo | formatselect | bold italic backcolor | codesample \
                       alignleft aligncenter alignright alignjustify | \
                       bullist numlist outdent indent | removeformat | table | code | help",
                     ],

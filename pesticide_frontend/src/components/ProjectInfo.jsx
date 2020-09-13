@@ -18,6 +18,8 @@ import axios from "axios";
 import EditProjectWithModal from "./EditProjectWithModal";
 import * as api_links from "../APILinks";
 import MemberButton from "./MemberButton";
+import Prism from "prismjs";
+import "prismjs/themes/prism-tomorrow.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -89,6 +91,8 @@ const ProjectInfo = (props) => {
       })
       .catch((err) => console.log(err));
   }
+
+  Prism.highlightAll();
 
   React.useEffect(() => {
     fetchCurrentUserInfo();
