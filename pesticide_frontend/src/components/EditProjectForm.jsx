@@ -12,7 +12,6 @@ import Chip from "@material-ui/core/Chip";
 import { withRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { Editor } from "@tinymce/tinymce-react";
-
 import axios from "axios";
 
 import ImageWithModal from "./ImageWithModal";
@@ -29,6 +28,10 @@ const EditProjectForm = (props) => {
   const [userList, setUserList] = React.useState([]);
   const [projectImage, setProjectImage] = React.useState(null);
   const [projectDescription, setProjectDescription] = React.useState("");
+  const [refresh, setRefresh] = React.useState({
+    refresh: false,
+    to: "",
+  });
 
   const handleFormChange = (event) => {
     const { name, value } = event.target;
@@ -145,9 +148,11 @@ const EditProjectForm = (props) => {
               });
           }
         }
-        setTimeout(() => {
-          window.location.href = "/projects";
-        }, 1000);
+        setRefresh({
+          refresh: true,
+          to: `/projects/${res.data.projectslug}`,
+        });
+        props.fetchData();
       })
       .catch((err) => {
         console.log(err);
@@ -395,6 +400,8 @@ const EditProjectForm = (props) => {
           </Grid>
         </form>
       </div>
+
+      {refresh && refresh.refresh && <Redirect to={refresh.to} />}
     </Container>
   );
 };

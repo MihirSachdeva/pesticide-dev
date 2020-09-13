@@ -68,8 +68,7 @@ const ProjectInfo = (props) => {
       .catch((err) => console.log(err));
   }
 
-  React.useEffect(() => {
-    fetchCurrentUserInfo();
+  async function fetchProjectData() {
     axios
       .get(api_links.API_ROOT + `projects/${props.projectID}/`)
       .then((res) => {
@@ -89,6 +88,11 @@ const ProjectInfo = (props) => {
         setWiki(res.data.wiki);
       })
       .catch((err) => console.log(err));
+  }
+
+  React.useEffect(() => {
+    fetchCurrentUserInfo();
+    fetchProjectData();
   }, [props.projectID]);
 
   return (
@@ -221,6 +225,7 @@ const ProjectInfo = (props) => {
                       <EditProjectWithModal
                         projectID={props.projectID}
                         projectName={project.name}
+                        fetchData={fetchProjectData}
                       />
                       <Button
                         className="btn-filled-small btn-filled-small-error"
@@ -314,6 +319,7 @@ const ProjectInfo = (props) => {
                     projectID={props.projectID}
                     projectName={project.name}
                     large
+                    fetchData={fetchProjectData}
                   />
 
                   <Button
