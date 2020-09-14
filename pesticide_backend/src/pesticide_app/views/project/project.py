@@ -13,6 +13,7 @@ from pesticide_app.permissions import ProjectCreatorMembersPermissions, AdminOrR
 from pesticide_app.models import Project, User, ProjectIcon
 from pesticide_app.mailing import add_project_member, project_status_update, new_project_added
 from slugify import slugify
+from pesticide.settings import FRONTEND_URL
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
@@ -60,8 +61,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
             if project_icon is not None:
                 ProjectIcon.objects.create(project=project, image=project_icon)
 
-            projectPageLink = "http://127.0.0.1:3000/projects/" + \
-                slugify(project.name)
+            projectPageLink = f"{FRONTEND_URL}/projects/{slugify(project.name)}"
             email_notification = threading.Thread(
                 target=new_project_added,
                 args=(
@@ -107,8 +107,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
                 project.status = new_status
                 project.save()
                 status_updated_by = user
-                projectPageLink = "http://127.0.0.1:3000/projects/" + \
-                    slugify(project.name)
+                projectPageLink = f"{FRONTEND_URL}/projects/{slugify(project.name)}"
                 email_notification = threading.Thread(
                     target=project_status_update,
                     args=(
@@ -167,8 +166,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
                 # members_to_be_removed = list(set(old_member_list).difference(set(new_member_list)))
                 project.members.set(new_member_list)
                 project.save()
-                projectPageLink = "http://127.0.0.1:3000/projects/" + \
-                    slugify(project.name)
+                projectPageLink = f"{FRONTEND_URL}/projects/{slugify(project.name)}"
                 # can also send email to those who have been removed from the project (members_to_be_removed)
                 # but not implementing this for now.
                 email_notification = threading.Thread(

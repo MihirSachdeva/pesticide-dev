@@ -16,6 +16,7 @@ from pesticide_app.permissions import IssueCreatorPermissions, IssueProjectCreat
 from pesticide_app.models import Issue, IssueStatus, User, Tag, IssueImage, Project
 from pesticide_app.mailing import new_issue_reported, issue_status_update, issue_assigned
 from slugify import slugify
+from pesticide.settings import FRONTEND_URL
 
 
 class IssueViewSet(viewsets.ModelViewSet):
@@ -73,8 +74,7 @@ class IssueViewSet(viewsets.ModelViewSet):
             if issue_image is not None:
                 IssueImage.objects.create(issue=issue, image=issue_image)
 
-            projectPageLink = "http://127.0.0.1:3000/projects/" + \
-                slugify(issue.project.name)
+            projectPageLink = f"{FRONTEND_URL}/projects/{slugify(issue.project.name)}/{issue.id}"
             email_notification = threading.Thread(
                 target=new_issue_reported,
                 args=(
@@ -120,8 +120,7 @@ class IssueViewSet(viewsets.ModelViewSet):
                 issue.status = new_status
                 issue.save()
                 status_updated_by = user
-                projectPageLink = "http://127.0.0.1:3000/projects/" + \
-                    slugify(issue.project.name)
+                projectPageLink = f"{FRONTEND_URL}/projects/{slugify(issue.project.name)}/{issue.id}"
                 email_notification = threading.Thread(
                     target=issue_status_update,
                     args=(
@@ -175,8 +174,7 @@ class IssueViewSet(viewsets.ModelViewSet):
                     status=status.HTTP_400_BAD_REQUEST
                 )
             assigned_by = request.user
-            projectPageLink = "http://127.0.0.1:3000/projects/" + \
-                slugify(issue.project.name)
+            projectPageLink = f"{FRONTEND_URL}/projects/{slugify(issue.project.name)}/{issue.id}"
             if assigned_to and assigned_to != previous_assignee:
                 issue.assigned_to = assigned_to
                 issue.save()
