@@ -11,6 +11,7 @@ SECRET_KEY = BASE_CONFIGURATION["keys"]["secret_key"]
 DEBUG = True
 ALLOWED_HOSTS = ['*']
 PAGE_SIZE = BASE_CONFIGURATION["pagination"]["page_size"]
+FRONTEND_URL = BASE_CONFIGURATION["frontend"]["url"]
 
 # Application definition
 

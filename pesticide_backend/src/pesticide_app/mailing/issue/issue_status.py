@@ -1,6 +1,7 @@
 from django.core.mail import send_mail
 from django.conf import settings
 from ..mail_templates.issue_status import IssueStatusUpdateTemplate
+from pesticide.settings import FRONTEND_URL
 
 
 def issue_status_update(project_name, project_page_link, issue_title, new_status, status_updated_by, reporter, project_members=[]):
@@ -23,7 +24,7 @@ def issue_status_update(project_name, project_page_link, issue_title, new_status
                 new_status,
                 status_updated_by,
                 person_name=name,
-                app_link="http://127.0.0.1:3000"
+                app_link=FRONTEND_URL
             )
 
             text = f"""
@@ -57,7 +58,7 @@ def issue_status_update(project_name, project_page_link, issue_title, new_status
             new_status,
             status_updated_by,
             person_name=name,
-            app_link="http://127.0.0.1:3000"
+            app_link=FRONTEND_URL
         )
 
         text = f"""

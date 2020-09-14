@@ -1,6 +1,7 @@
 from django.core.mail import send_mail
 from django.conf import settings
 from ..mail_templates.project_membership import ProjectMembershipTemplate
+from pesticide.settings import FRONTEND_URL
 
 
 def add_project_member(project_name, project_link, project_page_link, member_added_by, project_members, project_status, new_members=[]):
@@ -21,7 +22,7 @@ def add_project_member(project_name, project_link, project_page_link, member_add
                 project_members=project_members,
                 project_status=project_status,
                 person_name=name,
-                app_link="http://127.0.0.1:3000"
+                app_link=FRONTEND_URL
             )
 
             text = f"""
