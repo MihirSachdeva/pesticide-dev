@@ -51,39 +51,24 @@ const NewIssueForm = (props) => {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    let data = {
-      title: formData.title,
-      description: issueDescription,
-      timestamp: new Date(),
-      project: props.project,
-      tags: tagsID,
-    };
+    const data = new FormData();
+    data.append("title", formData.title);
+    data.append("description", issueDescription);
+    data.append("project", props.project);
+    data.append("tags", tagsID);
+    issueImage && data.append("image", issueImage, issueImage.name);
 
     axios
-      .post(api_links.API_ROOT + "issues/", data)
+      .post(api_links.API_ROOT + "issues/", data, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
       .then((res) => {
         let audio = new Audio(
           "../sounds/navigation_selection-complete-celebration.wav"
         );
         audio.play();
-        setTimeout(() => {
-          if (issueImage !== null && res.status == 201) {
-            let issue_id = res.data.id;
-            data = new FormData();
-            data.append("issue", issue_id);
-            data.append("image", issueImage, issueImage.name);
-            axios
-              .post(api_links.API_ROOT + "issueimages/", data)
-              .then((res) => console.log(res))
-              .catch((err) => {
-                console.log(err);
-                let audio = new Audio("../sounds/alert_error-03.wav");
-                audio.play();
-              });
-          }
-          props.getIssues();
-          props.handleClose();
-        }, 1000);
+        props.getIssues();
+        props.handleClose();
       })
       .catch((err) => {
         console.log(err);
