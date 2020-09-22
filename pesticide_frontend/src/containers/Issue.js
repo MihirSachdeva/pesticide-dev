@@ -21,6 +21,7 @@ import UtilityComponent from "../components/UtilityComponent";
 import ImageWithModal from "../components/ImageWithModal";
 import HEADER_NAV_TITLES from "../header_nav_titles";
 import * as api_links from "../APILinks";
+import * as snackbarActions from "../store/actions/snackbar";
 import WebSocketInstance from "../websocket";
 import Prism from "prismjs";
 import "prismjs/themes/prism-tomorrow.css";
@@ -82,19 +83,6 @@ const Issue = (props) => {
     const issueId = props.match.params.issueId;
     const projectSlug = props.match.params.projectslug;
     console.log(props.match.params);
-    // projectSlug &&
-    //   axios
-    //     .get(api_links.API_ROOT + "projectnameslug/")
-    //     .then((res) => {
-    //       const requiredProject = res.data.filter(
-    //         (project) => project.projectslug == projectSlug
-    //       )[0];
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //       window.location.href = "/404";
-    //     });
-
     axios
       .get(api_links.API_ROOT + `issues/${issueId}/`)
       .then((res) => {
@@ -210,12 +198,18 @@ const Issue = (props) => {
             display_picture: data.display_picture,
             enrollment_number: data.enrollment_number,
           });
+          props.showSnackbar("success", "Issue assigned successfully!", 6000);
         }, 1000);
       })
       .catch((err) => {
         console.log(err);
         let audio = new Audio("../sounds/alert_error-03.wav");
         audio.play();
+        props.showSnackbar(
+          "error",
+          "Couldn't assign issue. Try again later.",
+          6000
+        );
       });
   };
 
@@ -241,7 +235,6 @@ const Issue = (props) => {
         commentor: props.currentUser.id,
       };
       WebSocketInstance.newChatComment(commentObject);
-      WebSocketInstance.fetchComments(issue.id);
       setNewComment((prev) => ({
         ...prev,
         text: "",
@@ -270,6 +263,7 @@ const Issue = (props) => {
 
   const handleCommentDelete = (commentID) => {
     WebSocketInstance.deleteComment(commentID);
+    props.showSnackbar("success", "Comment deleted.", 6000);
   };
 
   const handleIssueDelete = () => {
@@ -345,12 +339,18 @@ const Issue = (props) => {
             type: data.type,
             id: data.id,
           });
+          props.showSnackbar("success", "Issue status updated!", 6000);
         }, 1000);
       })
       .catch((err) => {
         console.log(err);
         let audio = new Audio("../sounds/alert_error-03.wav");
         audio.play();
+        props.showSnackbar(
+          "error",
+          "Couldn't update issue status. Try again later.",
+          6000
+        );
       });
   };
 
@@ -1130,4 +1130,11 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, null)(Issue));
+const mapDispatchToProps = (dispatch) => {
+  return {
+    showSnackbar: (style, text, duration) =>
+      dispatch(snackbarActions.changeSnackbar(true, style, text, duration)),
+  };
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Issue));
