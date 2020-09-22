@@ -510,18 +510,13 @@ const Issue = (props) => {
                 <div className="issue-meta">
                   <div>
                     <Typography component="span" className="issue-button-label">
-                      Status:{" "}
+                      {"Status: "}
                     </Typography>
                     <Button
                       variant="outlined"
-                      className="project-reporter issue-button-filled-outline"
+                      className="project-issue-status-button"
                       style={{
-                        borderRadius: "10px",
-                        textTransform: "none",
-                        width: "fit-content",
-                        alignSelf: "flex-start",
-                        color: status && status.color,
-                        fontWeight: "700",
+                        backgroundColor: status && status.color,
                       }}
                       onClick={
                         (issue.reporter_details.id == props.currentUser.id ||
@@ -617,7 +612,7 @@ const Issue = (props) => {
                     style={{ alignItems: "flex-start" }}
                   >
                     <Typography component="span" className="issue-button-label">
-                      Tags:{" "}
+                      {"Tags: "}
                     </Typography>
 
                     <div className="project-issue-tags issue-tag-text">

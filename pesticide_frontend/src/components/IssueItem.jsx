@@ -80,13 +80,9 @@ const IssueItem = (props) => {
               <Button
                 variant="outlined"
                 style={{
-                  borderRadius: "10px",
-                  textTransform: "none",
-                  marginRight: "5px",
-                  color: status && status.color,
-                  fontWeight: "700",
+                  backgroundColor: status && status.color,
                 }}
-                className="issue-button-filled-outline"
+                className="project-issue-status-button"
               >
                 {status &&
                   (!fullScreen

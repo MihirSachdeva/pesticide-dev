@@ -1029,6 +1029,21 @@ header.MuiAppBar-positionAbsolute {
   margin-left: 5px;
 }
 
+.project-issue-status-button {
+  text-transform: none !important;
+  margin-right: 5px !important;
+  font-size: 13px !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  border-radius: 50px !important;
+  border: none !important;
+  white-space: nowrap;
+}
+
+.project-issue-status-button:hover {
+  opacity: 0.8;
+}
+
 @media screen and (max-width: 712px) {
   .project-issue-status {
     margin-right: 10px;
