@@ -16,6 +16,7 @@ import AlertDialog from "../components/AlertDialog";
 import UtilityComponent from "../components/UtilityComponent";
 import TitleCard from "../components/TitleCard";
 import HEADER_NAV_TITLES from "../header_nav_titles";
+import * as snackbarActions from "../store/actions/snackbar";
 
 import axios from "axios";
 
@@ -175,9 +176,16 @@ const Admin = (props) => {
       .patch(api_links.API_ROOT + `tags/${id}/`, tag)
       .then((res) => {
         fetchTags();
-        console.log(res.data);
+        props.showSnackbar("success", `Tag '${tag_text}' updated.`, 6000);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        props.showSnackbar(
+          "error",
+          "Couldn't update tag. Try again later.",
+          6000
+        );
+      });
   };
 
   const editStatus = (data, fields, options) => {
@@ -199,9 +207,20 @@ const Admin = (props) => {
       .patch(api_links.API_ROOT + `issuestatus/${id}/`, status)
       .then((res) => {
         fetchStatuses();
-        console.log(res.data);
+        props.showSnackbar(
+          "success",
+          `Issue status '${status_text}' updated.`,
+          6000
+        );
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        props.showSnackbar(
+          "error",
+          "Couldn't update issue status. Try again later.",
+          6000
+        );
+      });
   };
 
   const addTag = (fields) => {
@@ -218,9 +237,16 @@ const Admin = (props) => {
       .post(api_links.API_ROOT + "tags/", tag)
       .then((res) => {
         fetchTags();
-        console.log(res.data);
+        props.showSnackbar("success", `New tag '${tag_text}' added.`, 6000);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        props.showSnackbar(
+          "error",
+          "Couldn't add new tag. Try again later.",
+          6000
+        );
+      });
   };
 
   const addStatus = (fields, options) => {
@@ -240,8 +266,20 @@ const Admin = (props) => {
       .post(api_links.API_ROOT + "issuestatus/", status)
       .then((res) => {
         fetchStatuses();
+        props.showSnackbar(
+          "success",
+          `New status '${status_text}' added.`,
+          6000
+        );
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        props.showSnackbar(
+          "error",
+          "Couldn't add new issue status. Try again later.",
+          6000
+        );
+      });
   };
 
   const [value, setValue] = React.useState(0);
@@ -274,10 +312,17 @@ const Admin = (props) => {
     axios
       .patch(api_links.API_ROOT + `user_status/${id}/`, data)
       .then((res) => {
-        console.log(res);
         fetchUsers();
+        props.showSnackbar("success", `User permissions updated.`, 6000);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        props.showSnackbar(
+          "error",
+          "Couldn't update user permissions. Try again later.",
+          6000
+        );
+      });
   };
 
   const confirmAlert = (action, choice, data) => {
@@ -599,4 +644,11 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, null)(Admin));
+const mapDispatchToProps = (dispatch) => {
+  return {
+    showSnackbar: (style, text, duration) =>
+      dispatch(snackbarActions.changeSnackbar(true, style, text, duration)),
+  };
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Admin));
