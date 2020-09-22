@@ -433,6 +433,35 @@ const Issue = (props) => {
     "Dec",
   ];
 
+  const getDate = (timestamp) => {
+    let date;
+    if (new Date(timestamp).getMinutes() > 9) {
+      date =
+        new Date(timestamp).getHours() +
+        ":" +
+        new Date(timestamp).getMinutes() +
+        " • " +
+        monthList[new Date(timestamp).getMonth()] +
+        " " +
+        new Date(timestamp).getDate() +
+        ", " +
+        new Date(timestamp).getFullYear();
+    } else {
+      date =
+        new Date(timestamp).getHours() +
+        ":" +
+        "0" +
+        new Date(timestamp).getMinutes() +
+        " • " +
+        monthList[new Date(timestamp).getMonth()] +
+        " " +
+        new Date(timestamp).getDate() +
+        ", " +
+        new Date(timestamp).getFullYear();
+    }
+    return date;
+  };
+
   return (
     <>
       <div ref={topRef} style={{ display: "none" }}></div>
@@ -477,7 +506,9 @@ const Issue = (props) => {
                     {issue.reporter_details.name}
                   </div>
                   <div style={{ margin: "0 4px" }}>added this issue on</div>
-                  <div className="issue-scroll-date">{issue.timestamp}</div>
+                  <div className="issue-scroll-date">
+                    {getDate(issue.timestamp)}
+                  </div>
                 </div>
               </div>
             </div>
@@ -985,31 +1016,6 @@ const Issue = (props) => {
               <div className="comments-container">
                 {comments &&
                   comments.map((comment) => {
-                    let date;
-                    if (new Date(comment.timestamp).getMinutes() > 9) {
-                      date =
-                        new Date(comment.timestamp).getHours() +
-                        ":" +
-                        new Date(comment.timestamp).getMinutes() +
-                        " • " +
-                        monthList[new Date(comment.timestamp).getMonth()] +
-                        " " +
-                        new Date(comment.timestamp).getDate() +
-                        ", " +
-                        new Date(comment.timestamp).getFullYear();
-                    } else {
-                      date =
-                        new Date(comment.timestamp).getHours() +
-                        ":" +
-                        "0" +
-                        new Date(comment.timestamp).getMinutes() +
-                        " • " +
-                        monthList[new Date(comment.timestamp).getMonth()] +
-                        " " +
-                        new Date(comment.timestamp).getDate() +
-                        ", " +
-                        new Date(comment.timestamp).getFullYear();
-                    }
                     let isSentByCurrentUser =
                       comment.commentor_details.id == props.currentUser.id;
                     let commentClass = isSentByCurrentUser
@@ -1086,7 +1092,7 @@ const Issue = (props) => {
                             dangerouslySetInnerHTML={{ __html: comment.text }}
                           ></div>
                           <div className="comment-bottom">
-                            <div>{date}</div>
+                            <div>{getDate(comment.timestamp)}</div>
                           </div>
                         </div>
                         <div className="comment-between"></div>
