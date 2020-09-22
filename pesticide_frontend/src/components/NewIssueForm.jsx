@@ -14,6 +14,7 @@ import { withRouter } from "react-router-dom";
 
 import axios from "axios";
 import * as api_links from "../APILinks";
+import * as snackbarActions from "../store/actions/snackbar";
 
 const NewIssueForm = (props) => {
   const [tags, setTags] = React.useState([]);
@@ -69,11 +70,17 @@ const NewIssueForm = (props) => {
         audio.play();
         props.getIssues();
         props.handleClose();
+        props.showSnackbar("success", "New issue added!", 6000);
       })
       .catch((err) => {
         console.log(err);
         let audio = new Audio("../sounds/alert_error-03.wav");
         audio.play();
+        props.showSnackbar(
+          "error",
+          "Couldn't add new issue. Try again later.",
+          6000
+        );
       });
   };
 
@@ -258,4 +265,13 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, null)(NewIssueForm));
+const mapDispatchToProps = (dispatch) => {
+  return {
+    showSnackbar: (style, text, duration) =>
+      dispatch(snackbarActions.changeSnackbar(true, style, text, duration)),
+  };
+};
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(NewIssueForm)
+);
