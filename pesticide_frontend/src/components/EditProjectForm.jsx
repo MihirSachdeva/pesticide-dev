@@ -14,6 +14,7 @@ import { connect } from "react-redux";
 import { Editor } from "@tinymce/tinymce-react";
 import axios from "axios";
 
+import * as snackbarActions from "../store/actions/snackbar";
 import ImageWithModal from "./ImageWithModal";
 import * as api_links from "../APILinks";
 
@@ -80,19 +81,23 @@ const EditProjectForm = (props) => {
           "../sounds/navigation_selection-complete-celebration.wav"
         );
         audio.play();
+        props.showSnackbar("success", "Project details updated!", 6000);
 
         editedPersonsList.length &&
           axios
             .patch(api_links.UPDATE_PROJECT_MEMBERS(props.projectID), {
               members: editedPersonsList,
             })
-            .then((res) => {
-              console.log(res);
-            })
+            .then((res) => {})
             .catch((err) => {
               console.log(err);
               let audio = new Audio("../sounds/alert_error-03.wav");
               audio.play();
+              props.showSnackbar(
+                "error",
+                "Couldn't update project members. Try again later.",
+                6000
+              );
             });
 
         status != oldStatus &&
@@ -100,13 +105,16 @@ const EditProjectForm = (props) => {
             .patch(api_links.UPDATE_PROJECT_STATUS(props.projectID), {
               status: status,
             })
-            .then((res) => {
-              console.log(res);
-            })
+            .then((res) => {})
             .catch((err) => {
               console.log(err);
               let audio = new Audio("../sounds/alert_error-03.wav");
               audio.play();
+              props.showSnackbar(
+                "error",
+                "Couldn't update project status. Try again later.",
+                6000
+              );
             });
 
         if (
@@ -127,24 +135,30 @@ const EditProjectForm = (props) => {
                 api_links.API_ROOT + `projecticons/${res.data.icon_id}/`,
                 data
               )
-              .then((res) => {
-                console.log(res);
-              })
+              .then((res) => {})
               .catch((err) => {
                 console.log(err);
                 let audio = new Audio("../sounds/alert_error-03.wav");
                 audio.play();
+                props.showSnackbar(
+                  "error",
+                  "Couldn't update project icon. Try again later.",
+                  6000
+                );
               });
           } else {
             axios
               .post(api_links.API_ROOT + `projecticons/`, data)
-              .then((res) => {
-                console.log(res);
-              })
+              .then((res) => {})
               .catch((err) => {
                 console.log(err);
                 let audio = new Audio("../sounds/alert_error-03.wav");
                 audio.play();
+                props.showSnackbar(
+                  "error",
+                  "Couldn't add project icon. Try again later.",
+                  6000
+                );
               });
           }
         }
@@ -158,6 +172,11 @@ const EditProjectForm = (props) => {
         console.log(err);
         let audio = new Audio("../sounds/alert_error-03.wav");
         audio.play();
+        props.showSnackbar(
+          "error",
+          "Couldn't update project details. Try again later.",
+          6000
+        );
       });
   };
 
@@ -424,4 +443,13 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, null)(EditProjectForm));
+const mapDispatchToProps = (dispatch) => {
+  return {
+    showSnackbar: (style, text, duration) =>
+      dispatch(snackbarActions.changeSnackbar(true, style, text, duration)),
+  };
+};
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(EditProjectForm)
+);
