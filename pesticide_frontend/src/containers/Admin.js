@@ -530,14 +530,13 @@ const Admin = (props) => {
                   statuses.map((status, index) => (
                     <Button
                       style={{
-                        color: status.color,
+                        backgroundColor: status && status.color,
                         textTransform: "none",
                         fontWeight: "900",
-                        fontSize: "17px",
                         width: "fit-content",
                         margin: "10px auto",
                       }}
-                      className="project-issue-tag issue-button-filled-outline"
+                      className="project-issue-status-button"
                       onClick={() => {
                         openFormDialog(
                           "edit_status",

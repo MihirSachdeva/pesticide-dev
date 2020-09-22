@@ -1738,20 +1738,19 @@ header.MuiAppBar-positionAbsolute {
 .admin-tags-container {
   display: grid;
   padding: 20px 10px 50px 10px;
-  /* grid-template-columns: auto auto auto auto auto; */
-  /* grid-gap: 20px; */
   white-space: nowrap;
-  /* display: flex; */
-  /* flex-flow: row wrap; */
-  position: r;
   grid-template-columns: repeat(auto-fill, 170px);
   justify-content: center;
   align-content: center;
-  /* align-items: center; */
 }
 
 .admin-tags-container button {
   margin: 0 auto;
+}
+
+.admin-tags-container .project-issue-status-button {
+  margin: 10px auto !important;
+  font-size: 17px !important;
 }
 
 button:active,
