@@ -141,6 +141,14 @@ const FormDialog = (props) => {
                     color: field.value,
                   }}
                 />
+                {field && field.name === "color" && (
+                  <input
+                    type="color"
+                    name={field.name}
+                    value={field.value}
+                    onChange={handleFieldChange}
+                  />
+                )}
               </>
             ))}
           {options &&
