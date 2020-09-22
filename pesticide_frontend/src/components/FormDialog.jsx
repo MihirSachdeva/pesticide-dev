@@ -73,6 +73,53 @@ const FormDialog = (props) => {
         <DialogTitle id="form-dialog-title">{props.title}</DialogTitle>
         <DialogContent>
           <DialogContentText>{props.description}</DialogContentText>
+          {["add_status", "edit_status"].includes(props.action) && (
+            <>
+              <Typography className="form-label">Preview</Typography>
+              <Button
+                className="project-issue-status-button"
+                style={{
+                  backgroundColor:
+                    fields && fields[1] && fields[1].value.length > 1
+                      ? fields[1].value
+                      : "gray",
+                }}
+              >
+                {fields && fields[0] && fields[0].value.length > 1
+                  ? fields[0].value
+                  : "Status text"}
+              </Button>
+            </>
+          )}
+          {["add_tag", "edit_tag"].includes(props.action) && (
+            <>
+              <Typography className="form-label">Preview</Typography>
+              <Button
+                style={{
+                  textTransform: "none",
+                  fontSize: "17px",
+                  width: "fit-content",
+                  margin: "10px auto",
+                }}
+                className="project-issue-tag issue-button-filled-outline"
+              >
+                <div
+                  style={{
+                    backgroundColor:
+                      fields && fields[1] && fields[1].value.length > 1
+                        ? fields[1].value
+                        : "gray",
+                  }}
+                  className="tag-color"
+                ></div>
+                <span>
+                  {fields && fields[0] && fields[0].value.length > 1
+                    ? fields[0].value
+                    : "Tag text"}
+                </span>
+              </Button>
+            </>
+          )}
           {fields &&
             fields != [] &&
             fields.map((field) => (
