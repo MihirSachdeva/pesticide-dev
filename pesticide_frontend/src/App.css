@@ -696,6 +696,70 @@ header.MuiAppBar-positionAbsolute {
   border: none !important;
 }
 
+.issue-scroll-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  position: fixed;
+  z-index: 1000;
+  margin: 0 !important;
+  overflow: auto !important;
+  box-shadow: 0px 5px 9px -7px rgb(0 0 0 / 20%) !important;
+  border: 1px solid #8787874d !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-radius: 0 !important;
+}
+
+.issue-scroll-header::-webkit-scrollbar {
+  display: none;
+}
+
+.issue-scroll-left {
+  display: flex;
+  align-items: center;
+}
+
+.issue-scroll-right {
+  padding-left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.issue-scroll-status {
+}
+
+.issue-scroll-title {
+  font-size: 18px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.issue-scroll-project {
+  padding-left: 10px;
+}
+
+.issue-scroll-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.issue-scroll-details-heading {
+  display: flex;
+  align-items: center;
+}
+
+.issue-scroll-meta {
+  display: flex;
+}
+
+.issue-scroll-reporter {
+  font-weight: 600;
+}
+
 .issue-header {
   font-weight: 500;
   font-size: 20px;
@@ -1248,6 +1312,7 @@ header.MuiAppBar-positionAbsolute {
 .comment {
   border-radius: 10px;
   margin: 0;
+  max-width: 100%;
 }
 
 .comment-between {

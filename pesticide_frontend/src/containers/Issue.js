@@ -5,6 +5,7 @@ import {
   Button,
   Menu,
   useMediaQuery,
+  Card,
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import DefaultTooltip from "@material-ui/core/Tooltip";
@@ -443,6 +444,77 @@ const Issue = (props) => {
       />
       {issue.reporter_details && (
         <>
+          <Card
+            className="issue-scroll-header"
+            style={{
+              display: !hoverButtons && "none",
+              top: !isMobile ? "65px" : "57px",
+              width: !isMobile ? "calc(100% - 340px)" : "100%",
+            }}
+          >
+            <div className="issue-scroll-left">
+              <div className="issue-scroll-status">
+                <Button
+                  variant="outlined"
+                  className="project-issue-status-button"
+                  style={{
+                    backgroundColor: status && status.color,
+                  }}
+                >
+                  {status && status.text}
+                </Button>
+              </div>
+              <div className="issue-scroll-details">
+                <div className="issue-scroll-details-heading">
+                  <div className="issue-scroll-title">{issue.title}</div>
+                  <div className="issue-scroll-project">
+                    {issue.project_details.name}
+                  </div>
+                </div>
+
+                <div className="issue-scroll-meta">
+                  <div className="issue-scroll-reporter">
+                    {issue.reporter_details.name}
+                  </div>
+                  <div style={{ margin: "0 4px" }}>added this issue on</div>
+                  <div className="issue-scroll-date">{issue.timestamp}</div>
+                </div>
+              </div>
+            </div>
+            <div className="issue-scroll-right">
+              {issue.tags &&
+                issue.tags.length != 0 &&
+                issue.tags.map((tag) => (
+                  <Button
+                    className="project-issue-tag issue-button-filled-outline"
+                    variant="outlined"
+                    style={{
+                      borderRadius: "10px",
+                      textTransform: "none",
+                      marginRight: "5px",
+                      fontWeight: "500",
+                      marginBottom: "5px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <div
+                      style={{
+                        backgroundColor:
+                          tagNameColorList &&
+                          tagNameColorList[tag] &&
+                          tagNameColorList[tag].tagColor,
+                      }}
+                      className="tag-color"
+                    ></div>
+                    <span>
+                      {tagNameColorList && tagNameColorList[tag].tagText}
+                    </span>
+                  </Button>
+                ))}
+            </div>
+          </Card>
           <div className="issue-header">
             <div>
               <Link
@@ -859,7 +931,7 @@ const Issue = (props) => {
             <div
               style={{
                 position: "absolute",
-                top: "70px",
+                top: "140px",
                 right: "10px",
                 display: "flex",
                 flexDirection: "column",
